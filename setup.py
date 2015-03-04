@@ -12,7 +12,11 @@ if sys.argv[-1] == 'publish':
 
 
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    with open(os.path.join(os.path.dirname(__file__), fname), encoding='utf-8') as f:
+        contents = f.read()
+
+    return contents
+
 
 setup(
     name="python-forecastio",
@@ -25,6 +29,6 @@ setup(
     url="http://zeevgilovitz.com/python-forecast.io/",
     packages=['forecastio'],
     package_data={'forecastio': ['LICENSE.txt', 'README.rst']},
-    long_description=open('README.rst').read(),
+    long_description=read('README.rst'),
     install_requires=['requests>=1.6'],
 )
